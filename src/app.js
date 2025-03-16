@@ -502,7 +502,7 @@ app.get('/qr/*', async (req, res) => {
   const connectedHost = (webDomain || req.headers['host']);
   const fileName = req.params[0]; // Example: 0fbb2132-296b-455e-bcbc-107ca9f103e9.jpg
   // Use HTTPS for the link if server is in production mode, or HTTP if not
-  const protocol = prodModeEnabled ? 'https' : 'http';
+  const protocol = 'http';
   // Check to see if the fileName has http in its name, if not, build a url
   let qrLink = '';
   if (fileName.startsWith('http')) {
