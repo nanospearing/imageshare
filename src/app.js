@@ -511,6 +511,7 @@ app.get('/qr/*', async (req, res) => {
   } else {
     qrLink = `${protocol}://${connectedHost}/uploads/${fileName}`;
   }
+  console.log(`Generating QR code for ${qrLink}`);
   try {
     // Generate the QR code
     const qrCodeDataURL = await QRCode.toDataURL(qrLink, {
@@ -532,6 +533,8 @@ app.get('/qr/*', async (req, res) => {
       res.setHeader('Content-Type', 'image/jpeg');
     }
     // Send the QR code image as the response
+    console.log('QR code generated successfully');
+    console.log('Buffer reads:' + qrCodeBuffer);
     res.send(qrCodeBuffer);
   } catch (error) {
     res.status(500).send('Error generating QR code');
