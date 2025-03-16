@@ -18,13 +18,13 @@ const webDomain = process.env.DOMAIN;
 // Domain used for Plausible analytics
 const plausibleDomain = process.env.PLAUSIBLE_DOMAIN;
 // File size limit for uploads in MB
-const uploadLimit = parseInt(process.env.UPLOAD_LIMIT, 10);
+const uploadLimit = 20
 // Time delay for automatically deleting files, in minutes
 const deleteDelay = (parseInt(process.env.AUTODELETE_TIME, 10) || 2);
 // Default name for file uploads
 const defaultFileTitle = 'ImageShare Upload';
 // Check if production mode is enabled, so we can default to SSL for image links and other actions
-const prodModeEnabled = false;
+const prodModeEnabled = true;
 // Privacy statement
 const privacyUrl = process.env.PRIVACY_POLICY;
 // Imgur API client ID
@@ -384,7 +384,7 @@ app.use(serveStatic(publicDir));
 // Handle POST requests with enctype="multipart/form-data"
 app.post(['/', '/m', '/m/'], upload.single('img'), async function (req, res, err) {
   // Use HTTPS for shortlink if server is in production mode, or HTTP if not
-  const protocol = prodModeEnabled ? 'https' : 'http';
+  const protocol = 'http'
   // Use provided domain name if possible, or connected hostname as fallback
   const connectedHost = (webDomain || req.headers['host']);
   if (req && req.file && req.file.path) {
@@ -533,8 +533,6 @@ app.get('/qr/*', async (req, res) => {
       res.setHeader('Content-Type', 'image/jpeg');
     }
     // Send the QR code image as the response
-    console.log('QR code generated successfully');
-    console.log('Buffer reads:' + qrCodeBuffer);
     res.send(qrCodeBuffer);
   } catch (error) {
     res.status(500).send('Error generating QR code');
