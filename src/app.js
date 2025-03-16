@@ -24,7 +24,7 @@ const deleteDelay = (parseInt(process.env.AUTODELETE_TIME, 10) || 2);
 // Default name for file uploads
 const defaultFileTitle = 'ImageShare Upload';
 // Check if production mode is enabled, so we can default to SSL for image links and other actions
-const prodModeEnabled = (process.env.PROD_MODE === 'true');
+const prodModeEnabled = false;
 // Privacy statement
 const privacyUrl = process.env.PRIVACY_POLICY;
 // Imgur API client ID
@@ -287,6 +287,7 @@ function renderMain(passedOptions) {
   if (data.userAgent.includes('Nintendo 3DS') && (data.softwareTitle.length > 32)) {
     data.softwareTitle = data.softwareTitle.substring(0, 32) + ' ...';
   }
+  console.log('qrLink: ' + data.qrLink);
   // Render initial header elements
   // Background color is defined in <body> attributes for ancient browsers, like Netscape 4.x
   let htmlString = `<!DOCTYPE html>
