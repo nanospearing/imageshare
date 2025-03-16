@@ -8,6 +8,7 @@
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "Corbin Davenport",
+  "type": "module",
   "license": "GPL-3.0",
   "dependencies": {
     "axios": "^1.7.9",
